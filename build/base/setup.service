@@ -1,0 +1,18 @@
+[Unit]
+Description=Setup Kong Kubernetes Ingress Controller
+Requires=network.target
+Requires=kind-product_uuid.mount
+After=network.target
+After=kind-product_uuid.mount
+
+[Service]
+Type=oneshot
+ExecStart=/opt/kong/setup.sh
+ExecStopPost=/opt/kong/cleanup.sh
+RemainAfterExit=true
+StandardOutput=journal
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

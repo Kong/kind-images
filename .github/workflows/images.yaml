@@ -1,0 +1,80 @@
+name: publish container images
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  base-image:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        path: ./build/base/
+        dockerfile: ./build/base/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: kong/kind-images/base
+        tag_with_sha: true
+        tag_with_ref: true
+
+  node-image:
+    runs-on: ubuntu-latest
+    needs: base-image
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        path: ./build/node/
+        dockerfile: ./build/node/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: kong/kind-images/node
+        tag_with_sha: true
+        tag_with_ref: true
+
+  proxy-only-image:
+    runs-on: ubuntu-latest
+    needs: base-image
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        path: ./build/proxy-only/
+        dockerfile: ./build/proxy-only/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: kong/kind-images/proxy-only
+        tag_with_sha: true
+        tag_with_ref: true
+
+  ctrl-only-image:
+    runs-on: ubuntu-latest
+    needs: base-image
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        path: ./build/ctrl-only/
+        dockerfile: ./build/ctrl-only/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: kong/kind-images/ctrl-only
+        tag_with_sha: true
+        tag_with_ref: true
