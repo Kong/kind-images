@@ -24,6 +24,7 @@ jobs:
         repository: kong/kind-images/base
         tag_with_sha: true
         tag_with_ref: true
+        tags: latest
 
   node-image:
     runs-on: ubuntu-latest
@@ -42,6 +43,7 @@ jobs:
         repository: kong/kind-images/node
         tag_with_sha: true
         tag_with_ref: true
+        tags: latest
 
   proxy-only-image:
     runs-on: ubuntu-latest
@@ -60,6 +62,7 @@ jobs:
         repository: kong/kind-images/proxy-only
         tag_with_sha: true
         tag_with_ref: true
+        tags: latest
 
   ctrl-only-image:
     runs-on: ubuntu-latest
@@ -78,3 +81,4 @@ jobs:
         repository: kong/kind-images/ctrl-only
         tag_with_sha: true
         tag_with_ref: true
+        tags: latest
