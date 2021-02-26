@@ -29,9 +29,11 @@ This is a companion to the [Kong Kubernetes Testing Framework (KTF)][ktf] which 
 
 The following images are provided by this repository:
 
-- [kind-images/node](https://docker.pkg.github.com/v2/kong/kind-images/node)
-- [kind-images/proxy-only](https://docker.pkg.github.com/v2/kong/kind-images/proxy-only)
-- [kind-images/ctrl-only](https://docker.pkg.github.com/v2/kong/kind-images/ctrl-only)
+- `kind-images/node`
+- `kind-images/proxy-only`
+- `kind-images/ctrl-only`
+
+Find all of these in the [Repository Packages][repopkg].
 
 These are updated and built automatically via [Github Actions][actions] and can be used to create Kubernetes clusters with Kind:
 
@@ -41,6 +43,7 @@ kind create cluster --name <NAME> --image kong/<IMAGE>
 
 **Note**: [Github Packages][pkg] currently [require basic auth login to pull (even for public images)][auth].
 
+[repopkg]:https://github.com/orgs/Kong/packages?repo_name=kind-images
 [actions]:https://github.com/features/actions
 [pkg]:https://github.com/features/packages
 [auth]:https://docs.github.com/en/packages/guides/pushing-and-pulling-docker-images#authenticating-to-github-container-registry
