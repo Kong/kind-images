@@ -64,6 +64,25 @@ jobs:
         tag_with_ref: true
         tags: latest
 
+  proxy-only-db-image:
+    runs-on: ubuntu-latest
+    needs: base-image
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: build image
+      uses: docker/build-push-action@v1
+      with:
+        path: ./build/proxy-only-db/
+        dockerfile: ./build/proxy-only-db/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: kong/kind-images/proxy-only-db
+        tag_with_sha: true
+        tag_with_ref: true
+        tags: latest
+
   ctrl-only-image:
     runs-on: ubuntu-latest
     needs: base-image

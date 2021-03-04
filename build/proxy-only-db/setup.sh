@@ -3,7 +3,7 @@
 set -euox pipefail
 
 # ------------------------------------------------------------------------------
-# Setup Kong Proxy (without Kubernetes Ingress Controller (DBLESS Mode))
+# Setup Kong Proxy (without Kubernetes Ingress Controller (DB Mode))
 # ------------------------------------------------------------------------------
 
 helm repo add kong https://charts.konghq.com
@@ -18,4 +18,10 @@ helm install ingress-controller kong/kong \
     --set admin.http.enabled=true \
     --set admin.http.nodePort=32080 \
     --set admin.tls.enabled=false \
-    --set tls.enabled=false
+    --set tls.enabled=false \
+    --set postgresql.enabled=true \
+    --set postgresql.postgresqlUsername=kong \
+    --set postgresql.postgresqlDatabase=kong \
+    --set postgresql.service.port=5432 \
+    --set env.database=postgres
+

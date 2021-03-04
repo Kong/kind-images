@@ -31,6 +31,7 @@ The following images are provided by this repository:
 
 - `kind-images/node`
 - `kind-images/proxy-only`
+- `kind-images/proxy-only-db`
 - `kind-images/ctrl-only`
 
 Find all of these in the [Repository Packages][repopkg].
